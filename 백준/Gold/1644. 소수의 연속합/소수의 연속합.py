@@ -7,22 +7,21 @@ n = int(input().strip())
 # i ~ j 까지 합이 N 인경우 면 되지않냐?
 # 투포인터? i ~ j 까지 합이 N
 
-prime = []
-
-def is_prime(x):
-    if x <= 1 :
-        return False
-    if x == 2:
-        return True
-    for i in range(2,int(x**0.5) + 1):
-        if x % i == 0:
-            return False
-    return True
-
-for i in range(2,n + 1):
-    if is_prime(i):
-        prime.append(i)
-
+def get_prime(n):
+    memo = [True]*(n + 1)
+    memo[0],memo[1] = False,False
+    for i in range(2,n + 1):
+        if memo[i] :
+            j = 2
+            while (i * j ) <= n:
+                memo[i*j] = False
+                j += 1
+    prime = []
+    for i in range(n + 1):
+        if memo[i]:
+            prime.append(i)
+    return prime
+prime = get_prime(n)
 en = 0
 s = 0
 ans = 0
