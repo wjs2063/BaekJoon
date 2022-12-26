@@ -18,7 +18,7 @@ def bfs(n):
         # 3으로 나누어떨어질때
         if num % 3 == 0:
             if not visited[num // 3] :
-                visited[num % 3] = True
+                visited[num // 3] = True
                 q.append((num // 3,distance + 1,pt | {num // 3}))
         if num % 2 == 0:
             if not visited[num // 2]:
