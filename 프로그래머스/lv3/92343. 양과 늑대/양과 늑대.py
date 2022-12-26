@@ -36,8 +36,9 @@ def solution(info, edges):
         answer = max(answer, num - wolf)
         # next step
         for i in range(n):
-            # 이미 방문했어?
+            # 방문하지 않은곳이면 패스하고
             if not state & ( 1 << i): continue
+            # 방문 한 곳이면 현재 노드를 방문체크하고 다음 스텝으로 넘겨
             if tree[i][0] != -1:
                 sol(state | (1 << tree[i][0]))
             if tree[i][1] != -1:
