@@ -6,7 +6,8 @@ def solution(n, info):
     score = 0
     # 11자리가 필요함
     # 10000 00000 00 
-    for state in range(1,1 << 12):
+    # 11111 11111 1 
+    for state in range(1,1 << 11 + 1):
         lion,apeach = 0,0
         arrow = n
         sub = [0]*(11)
