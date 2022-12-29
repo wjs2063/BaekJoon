@@ -82,12 +82,15 @@ int main(){
                 p.x = i;
                 p.y = j;
             }
+            // 못가는곳은 다 0으로바꾸자
             if (graph[i][j] == "0") dp[i][j] = 0;
         }
     }
+    // bfs 시도
     bfs(p);
     for (int i = 0;i < n ; i++){
         for (int j = 0 ; j < m ; j ++) {
+            // 끝부분 공백 안내주기
             if (j == m - 1) {
                 cout << dp[i][j] <<"\n" ;
                 continue;
@@ -100,3 +103,4 @@ int main(){
         }
     }
 }
+//최종 시간복잡도 O(N^2) 공간 O(N^2)
