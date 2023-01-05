@@ -12,7 +12,6 @@ for _ in range(m):
     # 승차
     if x[0] == '1':
         a,b,c = map(int,x.split())
-        c -= 1
         train[b] |= ( 1 << c)
     # 하차 -> 1 이면 0으로 만들고 0이면 0으로
     #3번째 승객 하차 ex 1100 ->  1000
@@ -20,19 +19,19 @@ for _ in range(m):
     #                1000
     elif x[0] == '2':
         a,b,c = map(int,x.split())
-        c -= 1
         train[b] &= ~(1 << c)
     # 뒤로가기
     elif x[0] == '3':
         c,b = map(int,x.split())
         # 20번째에 사람이 앉아있으면 제거해주고
         train[b] <<= 1
-        train[b] &= ~ ( 1 << 20)
+        train[b] &= ~ ( 1 << 21)
     else:
         # 1칸씩 뒤로
         c,b = map(int,x.split())
         # 0번쨰칸 제거 ,
         train[b] >>= 1
+        train[b] &= ~1
 # state 를 기록해서 카운트
 visit = set()
 cnt = 0
