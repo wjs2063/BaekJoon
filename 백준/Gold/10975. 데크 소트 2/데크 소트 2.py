@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+from collections import defaultdict
 input = sys.stdin.readline
 
 n = int(input().strip())
@@ -7,6 +8,7 @@ n = int(input().strip())
 arr = []
 for _ in range(n):
     arr.append(int(input().strip()))
+t = defaultdict(int)
 
 # 기본적으로 1개는 필요함
 
@@ -27,7 +29,8 @@ for _ in range(n):
 # 1 ->
 
 cc = sorted(arr[:]) # 정렬본
-
+for i,x in enumerate(cc):
+    t[x] = i
 # 각 숫자마다 정렬본한테 물어보는거지. 너 양옆에 들어갈수있는지
 
 temp = [ deque([arr[0]]) ]
@@ -39,7 +42,7 @@ for i in range(1,n):
     # 언제 들어갈수있냐? 정렬되었을때 num 바로 옆에있는 애들이면 가능하지
     # 바로옆에있는 애들이없으면 새로만들어야함
     # O(N)
-    x = cc.index(num)
+    x = t[num]
     flag = True
     # 각자 deque 는 오름차순 정렬로 유지시켜놓는다 !! 어떤 시점에서도 데크내에서는 오름차순이 유지됨
     # 현재 생성된 deque 를 다 돌면서 물어보는구간
@@ -69,5 +72,7 @@ print(len(temp))
 #1 5 3 4 7 6 -->   ( 1,3,4)  , ( 5 )  , (7  )
 
 #1 3 4 5 6 7 -->
+
+
 
 
