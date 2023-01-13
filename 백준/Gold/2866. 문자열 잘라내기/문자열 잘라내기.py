@@ -9,7 +9,7 @@ words = []
 for _ in range(r):
     words.append(input().strip())
 # 시작점 0 끝점 r
-sn,en = 0,r
+sn,en = 0,r - 1
 answer = 0
 
 # sn <= en 으로 설정
