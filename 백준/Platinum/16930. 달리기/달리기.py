@@ -63,6 +63,7 @@ def bfs():
                 # 범위,방문 패스
                 if nx < 0 or nx >= n or ny < 0 or ny >= m :continue
                 # 벽 패스
+                if visited[nx][ny] and abs(dp[nx][ny] - dp[a][b]) != d:continue
                 if arr[nx][ny] == "#":break
                 # abs(dp[nx][ny] - dp[a][b) 가 d 가 아니면 직선으로 갈수없다는소리다.
                 if not visited[nx][ny]:
