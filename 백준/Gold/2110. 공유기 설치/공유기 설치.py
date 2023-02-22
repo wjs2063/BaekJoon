@@ -1,26 +1,37 @@
 import sys
-n,c=map(int,sys.stdin.readline().split())
-home=[]
-for _ in range(n):
-    home.append(int(sys.stdin.readline()))
-home.sort()
-start=1
-end=home[-1]-home[0]
-#start 는 최소거리 1 end 는 최대거리 
-answer=0
+input = sys.stdin.readline
 
-while start<=end:
-    mid=(start+end)//2
-    ol=home[0]
-    cnt=1
-    for i in range(1,len(home)):
-        #거리가 mid 이상이면 공유기 설치
-        if home[i]-ol>=mid:
-            cnt+=1
-            ol=home[i]
-    if cnt>=c:
-        start=mid+1
-        answer=mid
+n,c = map(int,input().split())
+
+house = []
+
+for _ in range(n):
+    house.append(int(input().strip()))
+house.sort()
+
+sn,en = 1,house[-1]
+ans = 0
+while sn <= en:
+    # 공유기 사이의 최대 거리 mid
+    mid = (sn + en) // 2
+    # cnt 공유기 개수
+    cnt = 1
+    last = house[0]
+    #print("start")
+    for i in range(1,n):
+        # last := 최근설치한 공유기 위치
+        # 거리가 mid 보다 커지는순간 그자리에 공유기를 설치해야한다.
+        if house[i] - last >= mid:
+            #print(house[i])
+            last = house[i]
+            cnt += 1
+    #print(sn,en,cnt)
+    # 공유기를 적게 설치했다면
+    if cnt < c :
+        en = mid - 1
     else:
-        end=mid-1
-print(answer)
+        ans = mid
+        sn = mid + 1
+print(ans)
+
+
