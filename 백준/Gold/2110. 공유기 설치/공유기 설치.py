@@ -9,7 +9,7 @@ for _ in range(n):
     house.append(int(input().strip()))
 house.sort()
 
-sn,en = 1,house[-1]
+sn,en = 1,house[-1] - house[0]
 ans = 0
 while sn <= en:
     # 공유기 사이의 최대 거리 mid
@@ -33,5 +33,3 @@ while sn <= en:
         ans = mid
         sn = mid + 1
 print(ans)
-
-
