@@ -1,32 +1,54 @@
 import sys
 from collections import defaultdict
+sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 t = int(input().strip())
 
+# x노드의 깊이
+def dfs(x,depth):
+    c[x] = 1
+    d[x] = depth
+    for child in graph[x]:
+        if c[child] :continue
+        dfs(child,depth + 1)
+
+def lca(a,b):
+
+    while d[a] != d[b]:
+        # a 의 깊이가 더깊으면
+        if d[a] > d[b] :
+            a = parent[a]
+        else:
+            b = parent[b]
+    # 현재 깊이 가같으면
+
+    while a != b:
+        a = parent[a]
+        b = parent[b]
+    return a
+
 for _ in range(t):
-    n = int(input())
-    parent = defaultdict(int)
+    n = int(input().strip())
+    graph = defaultdict(list)
+    indegree = [0]*(n + 1)
+    # 깊이
+    d = [0]*(n + 1)
+    # 체크
+    c = [0]*(n + 1)
+    parent = [0]*(n + 1)
     for _ in range(n - 1):
-        a,b = map(int,input().split())
-        # b 의 부모는 a 이다
-        parent[b] = a
-    p,q = map(int,input().split())
-    # 일단 p 와 q 의 레벨을 맞춰야하지않을까? 레벨도 사실모름... ?? HOW ?
-    # 일단 한개를 먼저 다올려보내고
-    # 조상이 같아지는 순간부터는 그뒤로 조상이 다 같을거아닌가
-    # a b c d e f 라면
-    # k m c d e f 겠지?
-    # 그러면 공통은 c 일거고
-    # x 에 p의 조상 싹다넣고
-    x = set()
-    # 루트의 조상이아닐때까지
-    # p 가 q 의 조상이거나 q 가 p의 조상일수도있음
-    while p != 0:
-        x.add(p)
-        p = parent[p]
-    while q != 0:
-        if q in x:
+        p,ch = map(int,input().split())
+        graph[p].append(ch)
+        parent[ch] = p
+        indegree[ch] += 1
+    for i in range(1,n + 1):
+        if indegree[i] == 0:
+            root = i
             break
-        q = parent[q]
-    print(q)
+    dfs(root,0)
+    a,b = map(int,input().split())
+    print(lca(a,b))
+
+
+
