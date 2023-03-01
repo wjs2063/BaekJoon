@@ -1,28 +1,28 @@
 import sys
 from collections import deque
-input = sys.stdin.readline
-
-n,k = map(int,input().split())
-def bfs(n,k):
-    visit = set()
-    q = deque([(n,0)])
-    # 왼쪽으로 가야한다면 - 1 하는경우가 제일 빠르다
-    visit.add(n)
+si = sys.stdin.readline
+N, K = map(int, si().split())
+visited = [0 for _ in range(10**5 + 1)]
+def bfs():
+    q = deque()
+    q.append([N, 0])
+    visited[N] = 1
     while q:
-        pos,cnt = q.popleft()
-        if pos == k:return cnt
-        # x + 1과
-        if pos <= 200000 and 2*pos not in visit:
-            visit.add(2 * pos)
-            q.appendleft((2 * pos,cnt))
-        if pos + 1 not in visit:
-            visit.add(pos + 1)
-            q.append((pos + 1,cnt + 1))
-        if pos - 1 >= 0 and pos - 1 not in visit:
-            visit.add((pos - 1))
-            q.append((pos - 1,cnt + 1))
-
-        # x - 1 과
-        # 2x 를보자
-
-print(bfs(n,k))
+        current, cnt = q.popleft()
+        
+        if current == K:
+            print(cnt)
+            return
+        if current * 2 <= 10 ** 5 and visited[current * 2] == 0:
+            q.appendleft([current * 2, cnt])
+            visited[current *2] = 1 # 방문처리
+        if 0 <= current - 1 <= 10 ** 5 and visited[current - 1] == 0:
+            q.append([current- 1, cnt + 1])
+            visited[current - 1] = 1 # 방문처리 
+        
+    
+        if current + 1 <= 10 ** 5 and visited[current + 1] == 0:
+            q.append([current + 1, cnt + 1])
+            visited[current + 1] = 1 # 방문처리
+    return
+bfs()
