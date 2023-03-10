@@ -1,25 +1,17 @@
+from collections import deque
 def solution(stones, k):
-    ans = 0
-    n = len(stones)
-    sn ,en = min(stones),max(stones)
-    # sn 이상 en 이하 까지 검사
-    while sn <= en :
-        mid = (sn + en) // 2
-        # mid 명까지 지나갈수있다 , c
-        cnt = 0
-        flag = False
-        for i in range(n):
-            # mid 명이 가면 mid - 1 명까지 지나보내면 -> mid - 1 을 해준다음 생각
-            if stones[i] - (mid - 1) <= 0:
-                cnt += 1
-            else:
-                cnt = 0
-            if cnt >= k :
-                flag = True
-                break
-        if flag:
-            en = mid - 1
-        else:
-            ans = mid
-            sn = mid + 1
-    return ans
+    q = deque([])
+    ans = []
+    # q 에는 인덱스정보담기 , 현재값이상의 인덱스만 저장한다.
+    for i,v in enumerate(stones):
+        # 현재 v 라는 값보다 작으면 모조리 뺴자
+        while q and stones[q[-1]] < v:
+            q.pop()
+        q.append(i)
+        
+        if q[0] == i - k:
+            q.popleft()
+            
+        if i >= k - 1:
+            ans.append(stones[q[0]])
+    return min(ans)
