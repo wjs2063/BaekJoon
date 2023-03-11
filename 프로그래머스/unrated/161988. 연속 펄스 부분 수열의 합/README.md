@@ -1,10 +1,10 @@
 # [unrated] 연속 펄스 부분 수열의 합 - 161988 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161988?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161988?language=cpp) 
 
 ### 성능 요약
 
-메모리: 110 MB, 시간: 1000.07 ms
+메모리: 28.9 MB, 시간: 9.12 ms
 
 ### 구분
 
