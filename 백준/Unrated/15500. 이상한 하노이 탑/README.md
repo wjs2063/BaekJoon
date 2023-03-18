@@ -4,11 +4,11 @@
 
 ### 성능 요약
 
-메모리: 32276 KB, 시간: 48 ms
+메모리: 32276 KB, 시간: 52 ms
 
 ### 분류
 
-Implementation, Data Structures, Simulation, Stack
+구현, 자료 구조, 시뮬레이션, 스택
 
 ### 문제 설명
 
