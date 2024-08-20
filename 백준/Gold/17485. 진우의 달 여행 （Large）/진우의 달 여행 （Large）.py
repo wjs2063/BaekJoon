@@ -28,10 +28,13 @@ for i in range(1,n + 1):
             if not 0 <= bj < m:continue
             for k in range(3):
                 if k == d :continue
-                dp[i][j][d] = min(dp[i][j][d], dp[bi][bj][k] + space[i][j])
+                if dp[i][j][d] > dp[bi][bj][k] + space[i][j]:
+                    dp[i][j][d] = dp[bi][bj][k] + space[i][j]
 
 ans = int(1e10)
 
 for j in range(m):
-    ans = min(ans,min(dp[n][j]))
+    t = min(dp[n][j])
+    if t < ans :
+        ans = t
 print(ans)
